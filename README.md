@@ -5,4 +5,4 @@
 - Ability to find a person with name delete it from the array
 - Ability to find number of contacts in the address book 
 - Ability to ensure there is no duplicate entry of the same person in the Address Book
-- Ability to view person by city or state
+- Ability to search person in a particular city or state 
