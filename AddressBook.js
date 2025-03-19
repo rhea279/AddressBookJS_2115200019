@@ -34,25 +34,50 @@ class Contact {
         this.phone = phone;
         this.email = email;
     }
-
+    //First And Last Name should start with Capital and Minimum of 3 Characters
     static validateName(name) {
         return /^[A-Z][a-zA-Z]{2,}$/.test(name);
     }
-
+    //Address,City and State should have minimum 4 Characters
     static validateAddress(value) {
-        return /^[A-Za-z0-9\s,.-]{4,}$/.test(value);  // Allows letters, numbers, spaces, comma, dot, hyphen
+        return /^[A-Za-z0-9\s,.-]{4,}$/.test(value);  
     }
-
+    //Check Zip Code Pattern
     static validateZip(zip) {
-        return /^\d{5}(-\d{4})?$/.test(zip); // Matches '12345' or '12345-6789'
+        return /^\d{5}(-\d{4})?$/.test(zip); 
     }
-
+    //Phone Number should be 10 Characters long
     static validatePhone(phone) {
-        return /^\+?[1-9][0-9]{9,14}$/.test(phone); // Supports international numbers
+        return /^\+?[1-9][0-9]{10}$/.test(phone); 
     }
-
+    //Check Email Pattern
     static validateEmail(email) {
         return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
     }
 }
 
+class AddressBook {
+    constructor() {
+        this.contacts = [];  
+    }
+    
+    addContact(contact) {
+        try {
+            if (contact instanceof Contact) {
+                this.contacts.push(contact);
+                console.log(`Contact Added: ${contact.firstName} ${contact.lastName}`);
+            } else {
+                throw new Error("Invalid contact object.");
+            }
+        } catch (error) {
+            console.error(`Error: ${error.message}`);
+        }
+    }
+
+    viewContacts() {
+        console.log("Address Book Contacts:");
+        this.contacts.forEach((contact, index) => {
+            console.log(`${index + 1}. ${contact.firstName} ${contact.lastName} - ${contact.phone}`);
+        });
+    }
+}
