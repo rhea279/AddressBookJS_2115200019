@@ -34,6 +34,10 @@ class Contact {
         this.phone = phone;
         this.email = email;
     }
+        toString() {
+            return `${this.firstName} ${this.lastName} | ${this.phone} | ${this.email} | ${this.city}, ${this.state}`;
+        }
+    
     //First And Last Name should start with Capital and Minimum of 3 Characters
     static validateName(name) {
         return /^[A-Z][a-zA-Z]{2,}$/.test(name);
@@ -141,10 +145,10 @@ class AddressBook {
             .map(contact => `${contact.firstName} ${contact.lastName} - ${contact.phone}`);
     
         if (peopleInCity.length > 0) {
-            console.log(`\n📍 People in ${city}:`);
+            console.log(`\nPeople in ${city}:`);
             console.log(peopleInCity.join("\n"));
         } else {
-            console.log(`\n❌ No people found in ${city}.`);
+            console.log(`\nNo people found in ${city}.`);
         }
     }
     
@@ -155,18 +159,27 @@ class AddressBook {
             .map(contact => `${contact.firstName} ${contact.lastName} - ${contact.phone}`);
     
         if (peopleInState.length > 0) {
-            console.log(`\n🌍 People in ${state}:`);
+            console.log(`\nPeople in ${state}:`);
             console.log(peopleInState.join("\n"));
         } else {
-            console.log(`\n❌ No people found in ${state}.`);
+            console.log(`\nNo people found in ${state}.`);
         }
     }
     //View Contacts in AddressBook
     viewContacts() {
-        console.log("Address Book Contacts:");
-        this.contacts.forEach((contact, index) => {
-            console.log(`${index + 1}. ${contact.firstName} ${contact.lastName} - ${contact.phone}`);
+        console.log("📖 Address Book:");
+        this.contacts.forEach(contact => console.log(String(contact))); 
+    }
+    
+    // Sort Contacts Alphabetically by First Name, then by Last Name
+    sortContacts() {
+        this.contacts.sort((a, b) => {
+            if (a.firstName === b.firstName) {
+                return a.lastName.localeCompare(b.lastName);
+            }
+            return a.firstName.localeCompare(b.firstName);
         });
+        console.log("Contacts Sorted Alphabetically!");
     }
      // Count the number of contacts using reduce()
      countContacts() {
