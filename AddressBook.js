@@ -60,7 +60,7 @@ class AddressBook {
     constructor() {
         this.contacts = [];  
     }
-    
+    //Add A Contact
     addContact(contact) {
         try {
             if (contact instanceof Contact) {
@@ -73,7 +73,25 @@ class AddressBook {
             console.error(`Error: ${error.message}`);
         }
     }
+     // Find a contact by first and last name
+     findContact(firstName, lastName) {
+        return this.contacts.find(contact => 
+            contact.firstName.toLowerCase() === firstName.toLowerCase() &&
+            contact.lastName.toLowerCase() === lastName.toLowerCase()
+        );
+    }
 
+    // Edit an existing contact
+    editContact(firstName, lastName, newDetails) {
+        let contact = this.findContact(firstName, lastName);
+        if (contact) {
+            Object.assign(contact, newDetails);
+            console.log("Contact updated successfully.");
+        } else {
+            console.log("Contact not found.");
+        }
+    }
+    //View Contacts in AddressBook
     viewContacts() {
         console.log("Address Book Contacts:");
         this.contacts.forEach((contact, index) => {
