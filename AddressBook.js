@@ -48,9 +48,8 @@ class Contact {
     }
     //Phone Number should be 10 Characters long
     static validatePhone(phone) {
-        return /^(?:\+91)?[6-9]\d{9}$/.test(phone);  
-    }
-    
+        return /^(?:\+91\s?|0)?[6-9]\d{9}$/.test(phone);  
+    }      
     //Check Email Pattern
     static validateEmail(email) {
         return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
@@ -119,6 +118,21 @@ class AddressBook {
         } else {
             console.log("Contact not found.");
         }
+    }
+    // Search contacts by City
+    searchByCity(city) {
+        const result = this.contacts.filter(contact => 
+            contact.city.toLowerCase() === city.toLowerCase()
+        );
+        return result;
+    }
+
+    // Search contacts by State
+    searchByState(state) {
+        const result = this.contacts.filter(contact => 
+            contact.state.toLowerCase() === state.toLowerCase()
+        );
+        return result;
     }
 
     //View Contacts in AddressBook
