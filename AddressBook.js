@@ -134,7 +134,33 @@ class AddressBook {
         );
         return result;
     }
-
+     // View Persons by City 
+    viewPersonsByCity(city) {
+        let peopleInCity = this.contacts
+            .filter(contact => contact.city.toLowerCase() === city.toLowerCase())
+            .map(contact => `${contact.firstName} ${contact.lastName} - ${contact.phone}`);
+    
+        if (peopleInCity.length > 0) {
+            console.log(`\n📍 People in ${city}:`);
+            console.log(peopleInCity.join("\n"));
+        } else {
+            console.log(`\n❌ No people found in ${city}.`);
+        }
+    }
+    
+    // View Persons by State 
+    viewPersonsByState(state) {
+        let peopleInState = this.contacts
+            .filter(contact => contact.state.toLowerCase() === state.toLowerCase())
+            .map(contact => `${contact.firstName} ${contact.lastName} - ${contact.phone}`);
+    
+        if (peopleInState.length > 0) {
+            console.log(`\n🌍 People in ${state}:`);
+            console.log(peopleInState.join("\n"));
+        } else {
+            console.log(`\n❌ No people found in ${state}.`);
+        }
+    }
     //View Contacts in AddressBook
     viewContacts() {
         console.log("Address Book Contacts:");
