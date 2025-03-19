@@ -16,10 +16,10 @@ class Contact {
             throw new Error("State must be at least 4 characters long.");
         }
         if (!Contact.validateZip(zip)) {
-            throw new Error("Invalid Zip Code format. Must be 5 or 9 digits.");
+            throw new Error("Invalid Zip Code format. Must be 6 digits.");
         }
         if (!Contact.validatePhone(phone)) {
-            throw new Error("Invalid Phone Number format. Must be 10-15 digits, with optional country code.");
+            throw new Error("Invalid Phone Number format. Must be 10 digits, with optional country code.");
         }
         if (!Contact.validateEmail(email)) {
             throw new Error("Invalid Email format.");
@@ -44,12 +44,13 @@ class Contact {
     }
     //Check Zip Code Pattern
     static validateZip(zip) {
-        return /^\d{5}(-\d{4})?$/.test(zip); 
+        return /^\d{6}$/.test(zip); 
     }
     //Phone Number should be 10 Characters long
     static validatePhone(phone) {
-        return /^\+?[1-9][0-9]{10}$/.test(phone); 
+        return /^(?:\+91)?[6-9]\d{9}$/.test(phone);  
     }
+    
     //Check Email Pattern
     static validateEmail(email) {
         return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
@@ -60,15 +61,28 @@ class AddressBook {
     constructor() {
         this.contacts = [];  
     }
-    //Add A Contact
+    // Check if a contact already exists
+    isDuplicate(firstName, lastName) {
+        return this.contacts.some(contact => 
+            contact.firstName.toLowerCase() === firstName.toLowerCase() &&
+            contact.lastName.toLowerCase() === lastName.toLowerCase()
+        );
+    }
+
+    // Add A Contact (with duplicate check)
     addContact(contact) {
         try {
-            if (contact instanceof Contact) {
-                this.contacts.push(contact);
-                console.log(`Contact Added: ${contact.firstName} ${contact.lastName}`);
-            } else {
+            if (!(contact instanceof Contact)) {
                 throw new Error("Invalid contact object.");
             }
+
+            if (this.isDuplicate(contact.firstName, contact.lastName)) {
+                console.log(`Contact ${contact.firstName} ${contact.lastName} already exists.`);
+                return;
+            }
+
+            this.contacts.push(contact);
+            console.log(`Contact Added: ${contact.firstName} ${contact.lastName}`);
         } catch (error) {
             console.error(`Error: ${error.message}`);
         }
