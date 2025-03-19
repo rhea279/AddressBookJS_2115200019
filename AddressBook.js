@@ -174,4 +174,17 @@ class AddressBook {
         console.log(`Total number of contacts: ${count}`);
         return count;
     }
+    // Count persons in a City (Using `reduce`)
+    countByCity(city) {
+        return this.contacts.reduce((count, contact) => 
+            contact.city.toLowerCase() === city.toLowerCase() ? count + 1 : count, 0
+        );
+    }
+
+    // Count persons in a State (Using `reduce`)
+    countByState(state) {
+        return this.contacts.reduce((count, contact) => 
+            contact.state.toLowerCase() === state.toLowerCase() ? count + 1 : count, 0
+        );
+    }
 }
