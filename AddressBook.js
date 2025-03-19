@@ -91,6 +91,22 @@ class AddressBook {
             console.log("Contact not found.");
         }
     }
+    
+    // Delete a contact by first and last name
+    deleteContact(firstName, lastName) {
+        const index = this.contacts.findIndex(contact => 
+            contact.firstName.toLowerCase() === firstName.toLowerCase() &&
+            contact.lastName.toLowerCase() === lastName.toLowerCase()
+        );
+
+        if (index !== -1) {
+            this.contacts.splice(index, 1);
+            console.log(`Contact ${firstName} ${lastName} deleted successfully.`);
+        } else {
+            console.log("Contact not found.");
+        }
+    }
+
     //View Contacts in AddressBook
     viewContacts() {
         console.log("Address Book Contacts:");
