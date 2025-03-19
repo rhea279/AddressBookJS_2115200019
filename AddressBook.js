@@ -181,6 +181,24 @@ class AddressBook {
         });
         console.log("Contacts Sorted Alphabetically!");
     }
+    // Add sorting methods using Array.sort()
+    sortByCity() {
+        this.contacts.sort((a, b) => a.city.localeCompare(b.city));
+        console.log("\nContacts Sorted by City!");
+        this.viewContacts();
+    }
+
+    sortByState() {
+        this.contacts.sort((a, b) => a.state.localeCompare(b.state));
+        console.log("\nContacts Sorted by State!");
+        this.viewContacts();
+    }
+
+    sortByZip() {
+        this.contacts.sort((a, b) => a.zip.localeCompare(b.zip));
+        console.log("\nContacts Sorted by Zip!");
+        this.viewContacts();
+    }
      // Count the number of contacts using reduce()
      countContacts() {
         const count = this.contacts.reduce((total) => total + 1, 0);
