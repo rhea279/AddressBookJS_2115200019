@@ -114,4 +114,10 @@ class AddressBook {
             console.log(`${index + 1}. ${contact.firstName} ${contact.lastName} - ${contact.phone}`);
         });
     }
+     // Count the number of contacts using reduce()
+     countContacts() {
+        const count = this.contacts.reduce((total) => total + 1, 0);
+        console.log(`Total number of contacts: ${count}`);
+        return count;
+    }
 }
